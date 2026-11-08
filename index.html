@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3eb">
+  <meta name="description" content="Art Style Atlas — 画風を名前だけでなく、線・色・質感・形・陰影などから探すための画風ガイド。現在は50画風のv1.0を公開。イラスト版、写真版、インフォグラフィック版などを順次拡充予定。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Art Style Atlas — 画風を、名前から特徴へ。">
+  <meta property="og:description" content="現在は50画風のv1.0を公開中。今後はイラスト版・写真版・インフォグラフィック版などへ展開予定。">
+  <title>Art Style Atlas — 画風を、名前から特徴へ。</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3eb;
+      --paper-2: #ece8dc;
+      --white: #fffefb;
+      --ink: #252b31;
+      --muted: #626973;
+      --line: #d7d4ca;
+      --blue: #2458e8;
+      --deep-blue: #173fa9;
+      --orange: #eb613f;
+      --shadow: 0 16px 44px rgba(31, 36, 44, .08);
+      --radius: 20px;
+      --max: 1120px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif; line-height: 1.75; font-size: 16px; }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; border-radius: 4px; }
+    .wrap { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .skip { position: absolute; top: -70px; left: 12px; z-index: 99; background: var(--blue); color: #fff; padding: 8px 14px; }
+    .skip:focus { top: 12px; }
+    header { border-bottom: 1px solid var(--line); background: rgba(246,243,235,.92); }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-family: Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: bold; letter-spacing: -.04em; white-space: nowrap; }
+    .brand-mark { width: 34px; height: 34px; background: var(--blue); border-radius: 9px 9px 4px 9px; position: relative; transform: rotate(-7deg); flex: none; }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: var(--paper); }
+    .brand-mark::before { width: 10px; height: 21px; top: 7px; left: 8px; border-radius: 10px 10px 1px 1px; transform: rotate(24deg); }
+    .brand-mark::after { width: 8px; height: 13px; top: 12px; right: 7px; border-radius: 10px; transform: rotate(-30deg); }
+    .nav-links { display: flex; align-items: center; gap: 27px; flex-wrap: wrap; }
+    .nav-links a { font-size: 13px; text-decoration: none; font-weight: 700; color: #4d545b; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.nav-cta { border: 1px solid var(--ink); border-radius: 100px; padding: 8px 15px; color: var(--ink); }
+    .nav-links a.nav-cta:hover { background: var(--ink); color: #fff; }
+    .hero { padding-top: clamp(52px, 8vw, 108px); padding-bottom: clamp(62px, 8vw, 100px); overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(35px, 5vw, 80px); align-items: center; }
+    .eyebrow, .kicker { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--blue); margin-bottom: 24px; }
+    .eyebrow::before { content:""; display: block; width: 25px; height: 2px; background: var(--blue); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(40px, 5.1vw, 71px); letter-spacing: -.085em; line-height: 1.24; font-weight: 800; margin-bottom: 24px; }
+    .hero h1 em { font-style: normal; color: var(--blue); white-space: nowrap; }
+    .hero .lead { font-size: clamp(16px, 1.5vw, 18px); color: #4c545b; line-height: 2; max-width: 540px; margin-bottom: 31px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 12px 23px; border-radius: 100px; text-decoration: none; font-size: 14px; font-weight: 760; transition: transform .16s, background .16s, box-shadow .16s; }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { background: var(--blue); color: #fff; box-shadow: 0 9px 24px rgba(36,88,232,.19); }
+    .button.primary:hover { background: var(--deep-blue); }
+    .button.secondary { border: 1px solid #bfc0ba; color: var(--ink); background: transparent; }
+    .button.secondary:hover { background: #fff; }
+    .arrow { font-size: 20px; line-height: 1; font-weight: 500; }
+    .micro-note { margin: 17px 0 0; font-size: 12px; color: var(--muted); }
+    .hero-art { height: 480px; position: relative; isolation: isolate; }
+    .hero-art::before { content: ""; position: absolute; inset: 32px 20px 22px 10px; background: #ebe4d4; border-radius: 45% 55% 51% 49% / 56% 43% 57% 44%; transform: rotate(-13deg); }
+    .hero-art::after { content: "✳"; position: absolute; color: var(--orange); font-size: 53px; right: 0; top: 8px; line-height: 1; }
+    .sample { position: absolute; padding: 9px 9px 30px; background: var(--white); border: 1px solid rgba(37,43,49,.15); border-radius: 4px; box-shadow: 0 24px 45px rgba(35,42,50,.15); width: 205px; height: 271px; transform-origin: 50% 70%; }
+    .sample svg { width: 100%; height: 100%; display: block; border-radius: 1px; }
+    .sample span { position: absolute; bottom: 5px; left: 12px; color: #4a5156; font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: .02em; }
+    .sample.left { left: 2%; top: 112px; transform: rotate(-16deg); z-index: 1; }
+    .sample.right { right: 2%; top: 105px; transform: rotate(12deg); z-index: 2; }
+    .sample.center { left: 29%; top: 58px; transform: rotate(-1deg); z-index: 3; }
+    .star-dot { width: 13px; height: 13px; background: var(--blue); position: absolute; border-radius: 50%; left: 14%; top: 33px; }
+    .stamp { position: absolute; right: 8%; bottom: 33px; border: 1px solid #acaaa0; border-radius: 100px; font: 10px ui-monospace, Menlo, monospace; letter-spacing: .1em; color: #767267; padding: 8px 13px; transform: rotate(-6deg); }
+    .stats { border-block: 1px solid var(--line); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); padding: 26px 0; }
+    .stat { padding: 0 30px; border-right: 1px solid var(--line); }
+    .stat:first-child { padding-left: 0; }
+    .stat:last-child { border-right: 0; }
+    .stat strong { font: 700 32px/1.15 Georgia, 'Times New Roman', serif; display: block; letter-spacing: -.04em; }
+    .stat span { font-size: 12px; color: var(--muted); }
+    section.block { padding: 100px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 34px; }
+    .kicker { color: var(--blue); margin-bottom: 12px; }
+    h2 { font-size: clamp(29px, 3.4vw, 43px); letter-spacing: -.065em; line-height: 1.35; margin-bottom: 0; }
+    .section-note { max-width: 380px; font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+    .release { display: grid; grid-template-columns: minmax(0,1fr) minmax(250px,.58fr); overflow: hidden; border: 1px solid #d0d1cc; border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+    .release-main { padding: clamp(26px, 5vw, 55px); }
+    .status { display: inline-flex; align-items: center; gap: 8px; background: #e9efe5; color: #37583d; border-radius: 100px; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .06em; padding: 7px 12px; margin-bottom: 28px; }
+    .status::before { content: ""; height: 7px; width: 7px; border-radius: 50%; background: #4c925b; }
+    .release h3 { font-size: clamp(28px, 3vw, 42px); line-height: 1.22; letter-spacing: -.055em; margin-bottom: 18px; }
+    .release h3 span { color: var(--blue); font-family: Georgia, 'Times New Roman', serif; }
+    .release p { font-size: 15px; color: #59616a; max-width: 470px; margin-bottom: 29px; }
+    .feature-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; padding: 0; list-style: none; }
+    .feature-list li { font-size: 12px; padding: 6px 11px; border: 1px solid #d9d9d4; border-radius: 100px; color: #4d555b; }
+    .release-aside { background: #20283d; position: relative; min-height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .release-aside::before { content: ""; position: absolute; width: 250px; height: 250px; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 92px rgba(255,255,255,.025); }
+    .release-aside::after { content: ""; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: #ef6a48; left: -39px; bottom: -45px; }
+    .release-number { position: relative; z-index: 1; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(115px, 16vw, 200px); line-height: 1; font-weight: bold; letter-spacing: -.11em; color: #f9eecf; margin-right: 28px; }
+    .release-aside small { position: absolute; bottom: 20px; right: 25px; color: #cbd1e1; font: 10px ui-monospace, Menlo, monospace; letter-spacing: .2em; }
+    .editions { border-top: 1px solid var(--line); }
+    .editions-intro { max-width: 780px; color: #565f67; font-size: 15px; line-height: 2; margin-bottom: 29px; }
+    .editions-intro strong { color: var(--ink); }
+    .edition-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
+    .edition-card { background: var(--white); border: 1px solid #d7d7d0; border-radius: var(--radius); padding: 27px 26px 25px; display: flex; flex-direction: column; min-width: 0; min-height: 320px; }
+    .edition-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 22px; }
+    .edition-index, .edition-en { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 700; font-size: 11px; letter-spacing: .12em; }
+    .edition-index { color: #879099; }
+    .edition-symbol { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 12px; font-size: 31px; line-height: 1; font-family: Georgia,serif; }
+    .edition-symbol.illust { color: #f2d6c0; background: #db684d; }
+    .edition-symbol.photo { color: #e7e6d5; background: #304e65; }
+    .edition-symbol.infographic { color: #fff2c2; background: #2660cc; }
+    .edition-en { color: var(--blue); margin: 0 0 4px; }
+    .edition-card h3 { font-size: clamp(20px, 2vw, 26px); letter-spacing: -.035em; line-height: 1.4; margin: 0 0 11px; }
+    .edition-card > p:not(.edition-en) { font-size: 13px; color: #5b656d; line-height: 1.85; margin: 0 0 24px; }
+    .edition-status { margin-top: auto; align-self: flex-start; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .03em; color: #816047; background: #f3e9dd; padding: 6px 12px; border-radius: 100px; }
+    .edition-foot { margin: 19px 0 0; font-size: 12px; color: #717880; line-height: 1.9; }
+    .method { background: var(--paper-2); border-block: 1px solid #dcd8cd; }
+    .method-intro { max-width: 670px; color: #555d64; margin: 19px 0 32px; }
+    .layer-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; }
+    .layer { min-width: 0; background: var(--white); border: 1px solid #d8d4c7; border-radius: 12px; padding: 22px 16px 23px; }
+    .layer .letter { display: block; font: italic bold 38px Georgia,serif; line-height: 1.1; color: var(--blue); margin-bottom: 20px; }
+    .layer b { display: block; font-size: 14px; line-height: 1.5; margin-bottom: 7px; }
+    .layer p { font-size: 12px; color: #6a7075; line-height: 1.65; margin: 0; }
+    .method-foot { margin: 23px 0 0; font-size: 12px; color: #73766f; }
+    .next-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .next-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 31px; background: rgba(255,255,255,.55); }
+    .coming { display: inline-block; font: 700 10px ui-monospace, Menlo, monospace; letter-spacing: .11em; color: #8c5c39; background: #f4e8d7; border-radius: 100px; padding: 7px 10px; margin-bottom: 22px; }
+    .next-card h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 25px; line-height: 1.15; letter-spacing: -.03em; margin-bottom: 14px; }
+    .next-card p { color: #5a6269; font-size: 13px; line-height: 1.9; margin: 0; }
+    .note { margin-top: 23px; padding: 19px 22px; border-left: 3px solid var(--blue); background: #eeece5; color: #555d64; font-size: 12px; }
+    .note strong { color: var(--ink); }
+    footer { background: #252b31; color: #f9f8f4; padding: 45px 0 35px; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-title { font: 700 24px Georgia,'Times New Roman',serif; margin-bottom: 6px; letter-spacing: -.03em; }
+    footer p { color: #c7c9ca; font-size: 12px; margin-bottom: 0; }
+    .footer-links { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { font-size: 12px; text-decoration: underline; text-underline-offset: 4px; color: #eee; }
+    footer .copyright { border-top: 1px solid #4c5155; margin-top: 36px; padding-top: 20px; color: #afb4b8; font: 11px ui-monospace, Menlo, monospace; letter-spacing: .03em; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { width: min(100%, 520px); margin: -2px auto 0; height: 410px; }
+      .hero { padding-bottom: 45px; }
+      .layer-grid { grid-template-columns: repeat(3,1fr); }
+      .edition-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(calc(100% - 34px), var(--max)); }
+      .nav { padding: 18px 0; min-height: 0; align-items: start; flex-direction: column; gap: 15px; }
+      .nav-links { gap: 17px; }
+      .nav-links a { font-size: 12px; }
+      .hero { padding-top: 54px; }
+      .hero h1 { letter-spacing: -.075em; }
+      .hero-art { height: 325px; width: min(100%, 390px); margin-top: 5px; }
+      .sample { width: 140px; height: 190px; padding: 7px 7px 25px; }
+      .sample.left { left: 0; top: 91px; }
+      .sample.center { top: 44px; left: 29%; }
+      .sample.right { top: 97px; right: 1%; }
+      .sample span { font-size: 8px; left: 9px; }
+      .stamp { bottom: 9px; }
+      .stats-grid { padding: 22px 0; }
+      .stat { padding: 0 10px; }
+      .stat strong { font-size: 26px; }
+      .stat span { font-size: 10px; }
+      section.block { padding: 67px 0; }
+      .section-head { flex-direction: column; align-items: start; }
+      .release { grid-template-columns: 1fr; }
+      .release-aside { min-height: 170px; order: -1; }
+      .release-number { font-size: 120px; }
+      .layer-grid { grid-template-columns: repeat(2,1fr); }
+      .next-grid { grid-template-columns: 1fr; }
+      .edition-grid { grid-template-columns: 1fr; }
+      .edition-card { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">本文へスキップ</a>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="./" aria-label="Art Style Atlas トップ"><span class="brand-mark" aria-hidden="true"></span>Art Style Atlas</a>
+      <nav class="nav-links" aria-label="メインナビゲーション">
+        <a href="#about">About</a>
+        <a href="#editions">Editions</a>
+        <a href="#method">Taxonomy</a>
+        <a href="#future">Roadmap</a>
+        <a class="nav-cta" href="./versions/v1.0/">Atlasを開く <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">A field guide to visual expression</p>
+          <h1>画風を、<br><em>名前から特徴へ。</em></h1>
+          <p class="lead">「水彩風」「アニメ風」「浮世絵風」だけでは、表現の違いは語り尽くせない。線、色、質感、形、陰影——。画風を読み解き、選び、画像生成に活かすためのアトラス。</p>
+          <div class="actions">
+            <a class="button primary" href="./versions/v1.0/">50画風を探索する <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="#method">分類の考え方 <span class="arrow" aria-hidden="true">↓</span></a>
+          </div>
+          <p class="micro-note">現在公開中：v1.0（総合画風版・50画風）｜今後もテーマ別の版を追加予定</p>
+        </div>
+        <div class="hero-art" role="img" aria-label="水彩、版画、幾何学的イラストを表した3枚のアートカード">
+          <span class="star-dot" aria-hidden="true"></span>
+          <div class="sample left" aria-hidden="true">
+            <svg viewBox="0 0 190 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="190" height="230" fill="#f4e5c5"/>
+              <circle cx="139" cy="57" r="39" fill="#dc674a" opacity=".88"/>
+              <path d="M-15 147C31 115 48 156 90 116S169 81 207 119V230H-15Z" fill="#88a9a1" opacity=".66"/>
+              <path d="M-12 190C41 147 89 193 133 152S184 142 207 156V230H-12Z" fill="#36657e" opacity=".78"/>
+              <path d="M37 235Q59 153 46 73M46 125Q12 115 8 89M49 108Q80 99 91 70" fill="none" stroke="#314943" stroke-width="4" stroke-linecap="round"/>
+              <path d="M44 76Q7 83 25 111Q43 106 44 76ZM51 113Q82 85 92 116Q69 131 51 113Z" fill="#677c54" opacity=".86"/>
+              <path d="M0 40Q49 23 88 37" fill="none" stroke="#fff7e7" stroke-width="5" opacity=".5"/>
+            </svg>
+            <span>01 / WASH &amp; PIGMENT</span>
+          </div>
+          <div class="sample center" aria-hidden="true">
+            <svg viewBox="0 0 190 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="190" height="230" fill="#f0e6d5"/>
+              <circle cx="139" cy="66" r="34" fill="#f1ae59"/>
+              <path d="M18 65C59 26 77 44 98 71S140 103 173 70" fill="none" stroke="#222c32" stroke-width="3.3"/>
+              <path d="M7 111C57 88 79 132 123 109S166 100 197 119V235H7Z" fill="#376dc7"/>
+              <path d="M-16 154Q49 124 100 157T203 145V238H-16Z" fill="#1b355c"/>
+              <path d="M-5 198Q44 169 101 202T198 200" fill="none" stroke="#f7e7d5" stroke-width="5"/>
+              <path d="M32 153L65 92L100 150Z" fill="#efe9de" stroke="#202b36" stroke-width="2"/>
+              <path d="M49 150L82 66L121 151Z" fill="#d8c9a9" stroke="#202b36" stroke-width="2"/>
+              <path d="M77 151L111 98L145 150Z" fill="#f3dfbd" stroke="#202b36" stroke-width="2"/>
+              <path d="M49 150L82 66L95 124L78 112Z" fill="#e65d44"/>
+              <path d="M51 52L69 28L88 52" fill="none" stroke="#202b36" stroke-width="2.5"/>
+            </svg>
+            <span>02 / LINE &amp; FORM</span>
+          </div>
+          <div class="sample right" aria-hidden="true">
+            <svg viewBox="0 0 190 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="190" height="230" fill="#f5e8d4"/>
+              <path d="M-10 2H201V102L111 149L-10 86Z" fill="#eb6e4b"/>
+              <circle cx="115" cy="67" r="45" fill="#f6ba64" stroke="#202b31" stroke-width="3"/>
+              <path d="M-13 86L70 122L42 237H-13Z" fill="#2c55a1" stroke="#202b31" stroke-width="4"/>
+              <path d="M48 229L81 122L181 131L211 232Z" fill="#f1c94d" stroke="#202b31" stroke-width="4"/>
+              <path d="M82 119L122 91L186 112L179 231H83Z" fill="#ebe9dc" stroke="#202b31" stroke-width="4"/>
+              <path d="M128 111L164 153L117 196L92 142Z" fill="#91a8bc" stroke="#202b31" stroke-width="3"/>
+              <path d="M102 132L140 112M98 154L151 130M113 176L164 145" stroke="#242c33" stroke-width="2"/>
+              <circle cx="35" cy="47" r="17" fill="#f3eddd"/><circle cx="35" cy="47" r="8" fill="#2e59a6"/>
+            </svg>
+            <span>03 / GRAPHIC &amp; SHAPE</span>
+          </div>
+          <div class="stamp" aria-hidden="true">VISUAL FIELD NOTES</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats" aria-label="プロジェクト概要">
+      <div class="wrap stats-grid">
+        <div class="stat"><strong>50</strong><span>収録画風 / v1.0</span></div>
+        <div class="stat"><strong>5</strong><span>記述レイヤー / A–E</span></div>
+        <div class="stat"><strong>v1.0</strong><span>現在の公開バージョン</span></div>
+      </div>
+    </div>
+
+    <section class="block" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">01 / Explore</p><h2 id="about-title">画風の世界を探索する。</h2></div>
+          <p class="section-note">現在の公開版はv1.0です。ここからテーマ別のアトラスへとラインアップを広げていきます。</p>
+        </div>
+        <article class="release">
+          <div class="release-main">
+            <div class="status">AVAILABLE NOW</div>
+            <h3>Art Style Atlas<br><span>Version 1.0</span></h3>
+            <p>最初の公開版は、幅広い表現を横断する<strong>総合画風版（50画風）</strong>。画風ごとの視覚的特徴を読み解き、画像生成の指示文づくりに活用できます。今後はイラスト・写真・インフォグラフィックなど、分野別の版も加えていく計画です。</p>
+            <ul class="feature-list" aria-label="主な収録内容"><li>50画風</li><li>画風の探索</li><li>特徴の解説</li><li>画像生成プロンプト</li></ul>
+            <a class="button primary" href="./versions/v1.0/">v1.0 を開く <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="release-aside" aria-hidden="true"><span class="release-number">50</span><small>ART STYLES / VOL. 01</small></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block editions" id="editions" aria-labelledby="editions-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">02 / Growing collection</p><h2 id="editions-title">v1.0は、はじまりにすぎない。</h2></div>
+          <p class="section-note">現在の総合画風版を出発点に、用途や表現領域ごとに深く探索できるアトラスを続々と追加していく予定です。</p>
+        </div>
+        <p class="editions-intro">「画風を探す」から「目的に合った表現を選ぶ」へ。今後は、イラスト、写真、インフォグラフィックなど、それぞれに固有の技法・視覚属性・プロンプトを整理した<strong>テーマ別エディション</strong>を展開していきます。</p>
+        <div class="edition-grid">
+          <article class="edition-card">
+            <div class="edition-top"><span class="edition-index">NEXT / 01</span><span class="edition-symbol illust" aria-hidden="true">✳</span></div>
+            <p class="edition-en">ILLUSTRATION</p>
+            <h3>イラスト版</h3>
+            <p>キャラクター、絵本、漫画、広告・エディトリアルなど。線の表情、デフォルメ、塗り、テクスチャを掘り下げる版。</p>
+            <span class="edition-status">企画中</span>
+          </article>
+          <article class="edition-card">
+            <div class="edition-top"><span class="edition-index">NEXT / 02</span><span class="edition-symbol photo" aria-hidden="true">◉</span></div>
+            <p class="edition-en">PHOTOGRAPHY</p>
+            <h3>写真版</h3>
+            <p>ポートレート、風景、スナップ、商品写真など。光、色調、質感、被写界深度、構図といった写真表現を扱う版。</p>
+            <span class="edition-status">企画中</span>
+          </article>
+          <article class="edition-card">
+            <div class="edition-top"><span class="edition-index">NEXT / 03</span><span class="edition-symbol infographic" aria-hidden="true">▥</span></div>
+            <p class="edition-en">INFOGRAPHICS</p>
+            <h3>インフォグラフィック版</h3>
+            <p>図解、ダイアグラム、データ可視化、説明図など。情報の階層、配色、レイアウト、視線誘導を整理する版。</p>
+            <span class="edition-status">企画中</span>
+          </article>
+        </div>
+        <p class="edition-foot">さらに新しい領域も検討していきます。上記は今後の構想であり、収録内容・公開順・時期・バージョン番号は未定です。</p>
+      </div>
+    </section>
+
+    <section class="block method" id="method" aria-labelledby="method-title">
+      <div class="wrap">
+        <p class="kicker">03 / Method</p>
+        <h2 id="method-title">画風を、5つの視点で捉える。</h2>
+        <p class="method-intro">Art Style Atlasは、画風名だけの一覧にとどまりません。美術史・制作技法・視覚的特徴・受け取られる印象を分けて記述する、多面的な分類体系を研究しています。</p>
+        <div class="layer-grid">
+          <div class="layer"><span class="letter">A</span><b>様式<br>アイデンティティ</b><p>歴史・文化・様式上の系譜</p></div>
+          <div class="layer"><span class="letter">B</span><b>媒体・<br>制作技法</b><p>何で、どのように作るか</p></div>
+          <div class="layer"><span class="letter">C</span><b>視覚属性</b><p>線・色・質感・形・空間など</p></div>
+          <div class="layer"><span class="letter">D</span><b>印象・感性</b><p>どのような印象を与えるか</p></div>
+          <div class="layer"><span class="letter">E</span><b>補助・根拠情報</b><p>用途・出典・分類の根拠</p></div>
+        </div>
+        <p class="method-foot">※ 分類体系は研究・検証途中の設計です。歴史的な様式の帰属と「その画風らしい見た目」は区別して扱います。</p>
+      </div>
+    </section>
+
+    <section class="block" id="future" aria-labelledby="future-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">04 / Roadmap</p><h2 id="future-title">アトラスの、その先へ。</h2></div>
+          <p class="section-note">分野別エディションの追加に加え、画風をより自由に探し、組み合わせ、生成するための仕組みも検討しています。</p>
+        </div>
+        <div class="next-grid">
+          <article class="next-card"><span class="coming">PLANNED / 将来構想</span><h3>Art Style<br>Prompt Library</h3><p>画風の特徴を、目的に合わせて使えるプロンプトの資産として整理。条件や用途に応じて比較しやすくする構想です。</p></article>
+          <article class="next-card"><span class="coming">PLANNED / 将来構想</span><h3>Art Style<br>Meta-Prompt</h3><p>「こんな雰囲気にしたい」という自然言語の要求から、画風の属性を組み立てて提案する仕組みを目指します。</p></article>
+        </div>
+        <div class="note"><strong>研究上の注記：</strong>画風の分類可能性と、画像生成モデルに対する属性の制御可能性は別の問題です。本プロジェクトの分類体系・プロンプトは改善の余地がある試行的な成果であり、学術的な妥当性や生成結果の再現性を保証するものではありません。</div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><div class="footer-title">Art Style Atlas</div><p>Exploring the grammar of visual expression.</p></div>
+        <div class="footer-links"><a href="./versions/v1.0/">Atlas v1.0</a><a href="https://github.com/aokikenichi/art-style-atlas" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#main">Back to top ↑</a></div>
+      </div>
+      <div class="copyright">© 2026 Art Style Atlas. An evolving visual style project.</div>
+    </div>
+  </footer>
+</body>
+</html>
